@@ -2,25 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    public $timestamps = false;
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'login',
         'email',
         'password',
+        'api_token',
     ];
 
     /**
@@ -30,15 +30,25 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'api_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function getToken($request) {
+        $user = User::where('login', $request['login'])->first();
+        if (!$user) {
+            return response('User does not exist', 422);
+        }
+
+        if (Hash::check($request['password'], $user['password'])) {
+            $token = Str::random(60);
+
+            $user->forceFill([
+                'api_token' => Str::random(60),
+            ])->save();
+            
+            return $token;
+        } else {
+            return response('Password is not correct', 422);
+        }
+    }
 }

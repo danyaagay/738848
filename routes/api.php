@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth_api')->apiResource('/book', BookController::class);
+Route::middleware('auth_api')->apiResource('/genre', GenreController::class);
+
+Route::post('/token', [UserController::class, 'token']);
+
+Route::post('/book/{book}/genre/{genre}', [BookController::class, 'genre']);
+Route::delete('/book/{book}/genre/{genre}', [BookController::class, 'genreDestroy']);
+
+Route::apiResource('/user', UserController::class);

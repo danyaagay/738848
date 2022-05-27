@@ -2,20 +2,20 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Illuminate\Http\Request;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use App\Models\User;
 
-class Auth
+class Auth extends Middleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
-     */
-    public function handle(Request $request, Closure $next)
+    protected function authenticate($request, array $guards)
     {
-        return $next($request);
+        $token = $request->query('api_token');
+        if (empty($token)) $token = $request->input('api_token');
+        if (empty($token)) $token = $request->bearerToken();
+
+        $user = User::where('api_token', $token)->first();
+        if($token !== NULL && $user) return;
+
+        $this->unauthenticated($request, $guards);
     }
 }
