@@ -17,12 +17,13 @@ use App\Http\Controllers\ShopController;
 |
 */
 
+Route::middleware('auth_api')->get('/product/search', [ProductController::class, 'search']);
+
+Route::middleware('auth_api')->post('/product/{product}/shop/{shop}', [ProductController::class, 'shop']);
+Route::middleware('auth_api')->delete('/product/{product}/shop/{shop}', [ProductController::class, 'shopDestroy']);
+
 Route::middleware('auth_api')->apiResource('/product', ProductController::class);
 Route::middleware('auth_api')->apiResource('/shop', ShopController::class);
 
 Route::post('/token', [UserController::class, 'token']);
-
-Route::post('/product/{product}/shop/{shop}', [ProductController::class, 'shop']);
-Route::delete('/product/{product}/shop/{shop}', [ProductController::class, 'shopDestroy']);
-
 Route::apiResource('/user', UserController::class);

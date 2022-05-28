@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('product_id');
             $table->string('shop_id');
             $table->integer('amount');
-            $table->integer('price');
+            $table->float('price');
         });
     }
 

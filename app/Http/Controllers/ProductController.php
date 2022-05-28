@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     public function shop(Request $request, $productId, $shopId)
     {
-        return $this->productRepository->attach($productId, $shopId, $request);
+        return $this->productRepository->attach($request, $productId, $shopId);
     }
 
     public function shopDestroy($productId, $shopId)
@@ -25,14 +25,19 @@ class ProductController extends Controller
         return $this->productRepository->detach($productId, $shopId);;
     }
 
-    public function index(Request $request)
+    public function search(Request $request)
     {
-        return $this->productRepository->all($request);
+        return $this->productRepository->search($request);
     }
 
-    public function show(Request $request, $id)
+    public function index()
     {
-        return $this->productRepository->one($request, $id);
+        return $this->productRepository->all();
+    }
+
+    public function show($id)
+    {
+        return $this->productRepository->one($id);
     }
 
     public function store(Request $request)

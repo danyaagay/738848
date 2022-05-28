@@ -8,46 +8,14 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    public function all($request)
+    public function all()
     {
-        $product = Product::query();
-        return $product->with('shops', function ($query) use ($request) {
-            $data = $request->all();
-            foreach ($data as $key => $value) {
-                if ($key === 'api_token') continue;
-                elseif ($key === 'sort') {
-                    $sorts = explode(',', $request->sort);
-                    if ($sorts) {
-                        foreach ($sorts as $sort) {
-                            $query->orderBy($sort, 'desc');
-                        }
-                    }
-                } else {
-                  $query->wherePivot($key, $value);
-                }
-            }
-        })->get();
+        return Product::with('shops')->get();
     }
 
-    public function one($request, $id)
+    public function one($id)
     {
-        $product = Product::query();
-        return $product->with('shops', function ($query) use ($request) {
-            $data = $request->all();
-            foreach ($data as $key => $value) {
-                if ($key === 'api_token') continue;
-                elseif ($key === 'sort') {
-                    $sorts = explode(',', $request->sort);
-                    if ($sorts) {
-                        foreach ($sorts as $sort) {
-                            $query->orderBy($sort, 'desc');
-                        }
-                    }
-                } else {
-                  $query->wherePivot($key, $value);
-                }
-            }
-        })->find($id);
+        return Product::with('shops')->find($id);
     }
 
     public function attach($request, $productId, $shopId)
@@ -79,5 +47,36 @@ class ProductRepository implements ProductRepositoryInterface
         $product = Product::findOrFail($productId);
         $product->shops()->detach($shopId);
         return Product::with('shops')->find($productId);
+    }
+
+    public function search($request)
+    {
+        $product = Product::query();
+        $product = $product->with('shops', function ($query) use ($request) {
+            $data = $request->all();
+            foreach ($data as $key => $value) {
+                if ($key === 'api_token' || $key === 'name') continue;
+                elseif ($key === 'sort') {
+                    $sorts = explode(',', $request->sort);
+                    if ($sorts) {
+                        foreach ($sorts as $sort) {
+                            $bind = explode(':', $sort);
+                            $query->orderBy($bind[0], $bind[1]);
+                        }
+                    }
+                } else {
+                  $query->wherePivot($key, $value);
+                }
+            }
+        });
+
+        $names = explode(',', $request->name);
+        if ($names) {
+            foreach ($names as $name) {
+                $product = $product->orWhere('name', $name);
+            }
+        }
+
+        return $product->get();
     }
 }
