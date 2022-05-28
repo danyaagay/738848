@@ -1,0 +1,425 @@
+{
+	"info": {
+		"_postman_id": "5a05802f-f230-407f-bd22-be5335d6216e",
+		"name": "738848",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17201422"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Show all",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost/api/product?sort=amount&api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "amount"
+								},
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/product/3?api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK&price=2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"3"
+							],
+							"query": [
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								},
+								{
+									"key": "price",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/product/search?api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK&name=milk",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"search"
+							],
+							"query": [
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								},
+								{
+									"key": "name",
+									"value": "milk"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/product?name=Milk&api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Milk"
+								},
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/product/1?name=Water&api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Water"
+								},
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/product/1?api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"1"
+							],
+							"query": [
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add shop",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/product/3/shop/3?api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK&amount=42&price=5.99",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"3",
+								"shop",
+								"3"
+							],
+							"query": [
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								},
+								{
+									"key": "amount",
+									"value": "42"
+								},
+								{
+									"key": "price",
+									"value": "5.99"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete shop",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/product/1/shop/2?api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"1",
+								"shop",
+								"2"
+							],
+							"query": [
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Show all",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/user?login=danil&password=1111",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "danil"
+								},
+								{
+									"key": "password",
+									"value": "1111"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/user/1",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shop",
+			"item": [
+				{
+					"name": "Show all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/shop?api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"shop"
+							],
+							"query": [
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/shop?name=Fortunas&api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"shop"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Fortunas"
+								},
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/shop/1?api_token=pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"shop",
+								"1"
+							],
+							"query": [
+								{
+									"key": "api_token",
+									"value": "pj4sFLyHyVOriw0efzRhMeZWcGoFetDmlK7jmruhiwgPGh7e4VJ5Z5xguPHK"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get/Update token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/token?login=danil&password=1111",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"token"
+					],
+					"query": [
+						{
+							"key": "login",
+							"value": "danil"
+						},
+						{
+							"key": "password",
+							"value": "1111"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
