@@ -15,14 +15,14 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function one($id)
     {
-        return Product::with('shops')->find($id);
+        return Product::with('shops')->findOrFail($id);
     }
 
     public function attach($request, $productId, $shopId)
     {
         $product = Product::whereDoesntHave('shops', function (Builder $query) use ($shopId) {
             $query->where('shop_id', '=', $shopId);
-        })->find($productId);
+        })->findOrFail($productId);
 
         if ($product) {
             $validated = $request->validate([
