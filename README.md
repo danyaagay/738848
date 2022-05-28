@@ -1,64 +1,137 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Установка
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+`git clone https://github.com/danyaagay/738848`
 
-## About Laravel
+Установка всех необходимых зависимостей:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```
+composer update
+composer install
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Коллекция Postman находится в файле 738848.postman_collection.json
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Docker (рекомендуется)
 
-## Learning Laravel
+Перейдите в папку приложение и используйте комманду
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+`./vendor/bin/sail up`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Будет создан Docker контейнер который можно запустить через Docker.
 
-## Laravel Sponsors
+Все запросы будут по адресу localhost/api/
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Не забудьте выполнить миграции 
 
-### Premium Partners
+`php artisan migrate`
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Обычная
 
-## Contributing
+Запуск на стандартном порте (8000):
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+`php artisan serve`
 
-## Code of Conduct
+Если стандартный порт занят и вы хотите запустить на другом, укажите аргумент --port:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+`php artisan serve --port=8088`
 
-## Security Vulnerabilities
+Все запросы будут по адресу localhost:8000/api/ или localhost:8088/api/
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Не забудьте выполнить миграции 
 
-## License
+`php artisan migrate`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Стек технологий
+
+Основной язык бэкенда: PHP 8.1.5
+
+Laravel Framework 9.14.1 в качестве фреймворка.
+
+MySQL 8.0.29 в качестве базы данных
+
+Composer в качестве менеджера пакетов.
+
+## Документация
+
+Существуют продукты и магазины, цена и количество одного продукта может отличаться в разных магазинах.
+
+### Авторизация
+
+Некоторые запросы такие как user@index, user@destroy созданы для удобства проверки:
+
+GET /api/user
+Получить всех пользователей
+
+POST /api/user?login={login}&password={password}
+Создать пользователя
+
+DELETE /api/user/{user}
+Удалить пользователя
+
+После создания пользователя нам потребуется токен для доступа к остальным методам, для его получения:
+
+POST /api/token?login={login}&password={password}
+Получить или обновить токен
+
+### Методы
+
+Для этих методов требуется токен, его передаем в параметре api_token.
+Например /api/product?api_token={token}
+
+Продукты:
+
+GET /api/product
+Получить все продукты
+
+GET /api/product/{product}
+Получить один продукт
+
+GET /api/product/search?name={name}&sort={sort}&{column}={value}
+Сортировать, искать продукты в магазинах (подробнее о нем далее)
+
+POST /api/product?name={name}
+Создать продукт
+
+PUT /api/product/{product}?name={name}
+Обновить продукт
+
+DELETE /api/product/{product}
+Удалить продукт
+
+POST /api/product/{product}/shop/{shop}?amount={amount}&price={price}
+Создать связь, где amount это количество продукта а price его цена в конкретном магазине
+
+DELETE /api/product/{product}/shop/{shop}
+Удалить связь
+
+Магазины:
+
+GET /api/shop
+Получить все магазины
+
+POST /api/shop?name={name}
+Создать магазин
+
+DELETE /api/shop?name={name}
+Удалить магазин
+
+### Сортировка и поиск
+
+GET /api/product/search
+Позволяет искать и сортировать продукты, вы можете указать несколько name и sort:
+
+GET /api/product/search?name=milk,bread&sort=price:asc,amount:desc
+Найти хлеб и молоко, отсортировать их по возрастанию цены и уменьшению количества.
+
+Также можно указать несколько столбцов для поиска:
+
+GET /api/product/search?name=bread&price=2.99&amount=5
+Найти хлеб имеющий цену 2.99 и количество 5
+
+## Несколько слов от автора
+
+DELETE /api/user/{user} не защищен, он существует только для удобства работы с базой при тестировании, в готовом приложении мы должны проверить что человек удаляющий себя или другого действительно имеет на это права.
+
+GET /api/product/search я мог вынести это в GET /api/product но оставил его для целей тестирования.
+
+Можно было так-же создание и удаление связей вынести в методы создания и удаление продукта.
