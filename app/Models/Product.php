@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Product extends Model
 {
     public $timestamps = false;
     
@@ -16,12 +16,10 @@ class Book extends Model
      */
     protected $fillable = [
         'name',
-        'author',
-        'size',
     ];
 
-    public function genres()
+    public function shops()
     {
-        return $this->belongsToMany(Genre::class);
+        return $this->belongsToMany(Shop::class)->withPivot('amount', 'price');
     }
 }

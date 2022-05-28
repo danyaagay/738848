@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Genre;
+use App\Models\Shop;
 
-class GenreController extends Controller
+class ShopController extends Controller
 {
 
     public function index()
     {
-        return Genre::all();
+        return Shop::all();
     }
 
     public function store(Request $request)
@@ -18,13 +18,13 @@ class GenreController extends Controller
         $validated = $request->validate([
             'name' => 'required|string'
         ]);
-        $genre = Genre::create($validated);
-        return $genre;
+        $shop = Shop::create($validated);
+        return $shop;
     }
 
     public function destroy($id)
     {
-        $genre = Genre::findOrFail($id);
-        $genre->delete();
+        $shop = Shop::findOrFail($id);
+        $shop->delete();
     }
 }

@@ -43,7 +43,7 @@ class User extends Model
             $token = Str::random(60);
 
             $user->forceFill([
-                'api_token' => Str::random(60),
+                'api_token' => $token,
             ])->save();
             
             return $token;
