@@ -1,3 +1,5 @@
+Сделано по ТЗ https://docs.google.com/document/d/1I5lGAuGzM_TahaYenMmEimxvlkV30EwcEryoHSgMOJw/edit?usp=sharing
+
 ## Установка
 
 `git clone https://github.com/danyaagay/738848`
